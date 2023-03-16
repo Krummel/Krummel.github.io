@@ -1,0 +1,187 @@
+
+/*Keyframes för att hantera css attribute vid varje tillfälle av animeringen. */
+
+@keyframes hidingSpeach{
+    0%   {opacity:0.5;transform: rotate(0deg);visibility:visible;}
+    1%   {opacity:1;transform: rotate(9deg);}
+    2%   {opacity:1;transform: rotate(0deg);}
+    98%  {opacity:1;transform: rotate(0deg);}
+    99%  {opacity:0.5;transform: rotate(9deg);}
+    100% {opacity:0;transform: rotate(0deg);visibility:hidden;}
+}
+/*@keyframes kimWiggle{*/
+/*    0%   {transform: rotate(0deg);}*/
+/*    25%  {transform: rotate(10deg);}*/
+/*    50%  {transform: rotate(-10deg);}*/
+/*    75%  {transform: rotate(5deg);}*/
+/*    100% {transform: rotate(0deg);}*/
+/*}*/
+.chatorama{
+    position: fixed;
+    z-index: 10000; 
+    height: 80px;
+    width: 80px;
+    right: 10px;
+    bottom: 10px;
+    display:block;
+	font-size: 0.9em;
+}
+.bai-open-chat-btn {
+	display: block;
+    background-image: url('kommun_kim_ikon.svg');
+    background-color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+	cursor:pointer;
+	border-radius: 50%;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #fff;
+	color:#017EB1;
+	width: 80px;
+	height: 80px;
+    /*animation: kimWiggle 500ms;*/
+    /*animation-delay: 2.3s;*/
+    /*animation-timing-function: linear;*/
+    transition-duration: 500ms;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.63,-0.29, 0.74, 0.05);
+}
+.kim-hiding {
+    transform: translate3d(45px, 10px, 0) rotate(-20deg) scale(0.8);
+}
+.kim-bai-chat__speech-bubble{
+    visibility:hidden;
+    display:block;
+    opacity:1;
+    z-index: 100; 
+	position: absolute;
+    top: 8px;
+    left: -145px;
+    background: #017EB1;
+    border: 2px solid #017EB1;
+    border-radius: 6px;
+    color: #fff;
+    font-family: Arial;
+    width: auto;
+    padding: 5px;
+    transform-origin: 100% 50%;
+}
+
+.hidingSpeach_animation{
+    animation: hidingSpeach 12s;
+    animation-delay: 4s;
+    animation-timing-function: ease-in-out;
+}
+
+.kim-bai-chat__speech-bubble:after{
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 28%;
+    left: 90%;
+    transform: rotate(-135deg);
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #017EB1;
+}
+.kim-bai-chat__speech-bubble p.normal{
+    font-size: 16px;
+    margin: 0;
+    color:#fff;
+}
+.kim-bai-chat__speech-bubble p.normal:first-child{
+    line-height:16px;
+}
+
+/*Styling för kryssknappen som skjuter Kim åt sidan utan att öppna chatten*/
+.xButton{
+    background-image: url(kommun_kim_kryssknapp.png);
+    background-color: #fff;
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    position: relative; 
+    cursor: pointer;
+    height:23px;
+    width:23px;
+    z-index: 90;
+    
+    /*position - ändra dessa värden för att bestämma var kryssknappen ska visas i förhållande till kommun-kim ikonen*/
+    right: 15px;
+    bottom: 100px;
+    /*position*/
+    
+    box-shadow: 0 0 2px #ccc;
+    border-radius:100%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #fff;
+    /*padding: 4px; */
+}
+.xButton:hover{
+    box-shadow: 0 0 3px #f2fbff;
+    border-color: #fff;
+}
+.kim_form_style{
+    display:block;
+    z-index: 90;
+}
+.kim_formInput_style{
+    display:block;
+    height:30px;
+    width:200px;
+    box-shadow: 0 0 2px #ccc;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #fff;
+}
+.kim_formSubmit_style{
+    display:block;
+    box-shadow: 0 0 2px #ccc;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #fff;
+    padding:10px;
+}
+
+/*Tabletview*/
+@media only screen and (max-width : 840px) {
+	.bai-open-chat-btn {
+	width: 80px;
+	height: 80px;
+	/*right: 20px;*/
+	/*bottom: 20px;*/
+	}
+	.kim-bai-chat__speech-bubble{
+        top: 0px;
+        left: -145px;
+    }
+	.xButton{
+	    display:none;
+	}
+    .kim-hiding {
+        transform: translate3d(30px, 10px, 0) rotate(-20deg) scale(1);
+    }
+}
+
+/*Mobileview*/
+@media only screen and (max-width : 480px) {
+	.bai-open-chat-btn {
+    	width: 65px;
+    	height: 65px;
+    	/*right: 20px;*/
+    	/*bottom: 20px;*/
+	}
+	.kim-bai-chat__speech-bubble{
+        top: 0px;
+        left: -145px;
+    }
+	.xButton{
+	    display:none;
+	}
+    .kim-hiding {
+        transform: translate3d(30px, 10px, 0) rotate(-20deg) scale(1);
+    }
+}
