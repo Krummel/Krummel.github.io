@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="se">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta charset="utf-8">
+	<meta name="viewport"
+	    content="width=device-width, initial-scale=1, user-scalable=yes">
+
+        <link rel = "stylesheet" type ="text/css" href ="kommun_kim_style.css" />  
+	    <script src="https://974se.boost.ai/chatPanel/chatPanel.js"></script> 
+	    <!-- <script src="kommun_kim_script.js"></script> -->
+        
+	<body>
+		<h1>Kommun-Kim</h1>
+		<script>
+			// document.addEventListener('DOMContentLoaded', (event) => {
+            //Ange webbsidor(url) där Kim inte ska visas.
+            //Lägg till webbsidor som Kim inte ska visas på i variabeln bortseWeb. Urlen behöver ha "" runt sig. Det går att lägga till flera urler som ska exkluderas. Separera då dessa med ett komma(,) tecken.
+            let bortseWeb = [""];
+            let hrefCurrent = window.location.href;
+            let showKim = true;
+            
+            for(var h = 0; h < bortseWeb.length; h++){
+                if(bortseWeb[h] === hrefCurrent){
+                    showKim = false;
+                }
+            }
+            
+            if(showKim === true){
+                //Skapa HTML objekt för kommun-kim
+                document.body.insertAdjacentHTML( 'beforeend', '<div class="chatorama"></div>' );
+                var chatorama = document.querySelector('.chatorama');
+                chatorama.insertAdjacentHTML('beforeend', '<button id="bai-open-chat-btn" class="bai-open-chat-btn" aria-label="Knapp för att starta AI-chattboten Kommun-Kim" alt="Bild och knapp för att öppna chatten Kommun-Kim, kommunens digitala Chattbot."/></button>');
+                chatorama.insertAdjacentHTML('beforeend', '<button id="xButton" class="xButton" aria-label="Kryssknapp för att flytta Kommun-Kim åt sidan" alt="Kryssknapp för att flytta Kommun-Kim åt sidan"/></button>');
+                chatorama.insertAdjacentHTML('beforeend', '<div class="kim-bai-chat__speech-bubble"></div>');
+                var chatBubble = document.querySelector('.kim-bai-chat__speech-bubble');
+                chatBubble.insertAdjacentHTML('beforeend', '<p class="normal">Frågor?</p>');
+                chatBubble.insertAdjacentHTML('beforeend', '<p class="normal">Chatta med mig!</p>');
+                
+                if (window.sessionStorage.getItem('animated') === null) { 
+                    chatBubble.classList.add('hidingSpeach_animation');
+                    window.sessionStorage.setItem('animated' ,1);
+                } 
+            
+            var chatArea = document.querySelector('.bai-open-chat-btn');
+            var xButtons = document.querySelector('.xButton');
+            const intElemClientWidth = window.screen.width;
+            
+            var options = {
+                chatPanel: {
+                    header: {
+                        filters: {
+                            filterValues: "lulea",
+                        },
+                        title: "Kommun-Kim",
+                    },
+                    styling: {
+                        pace: "fast",
+                        avatarUrl: 'kommun_kim_ikon.svg',
+                        primaryColor: "#f1f1f1",
+                    },
+                    settings: {
+                        pageUrl: "https://www.lulea.se/"
+                    },
+                },
+            };
+            var boost = window.boostInit("974se", options);
+            function openChat() {
+                boost.chatPanel.show();
+            }
+            //openChat();
+            
+            // Klicka på chattbot ikonen för att starta chatten & göm övriga objekt
+            chatArea.addEventListener('click', 
+            function () {
+                //console.log("klickat på Kim eller chattbubbla");
+                openChat(); //Starta chatsekvens, chatpanelen öppnas och man kan börja chatta med Kim
+                xButton.style.display = 'none';
+                chatBubble.style.display = 'none';
+                if(intElemClientWidth < 400){
+                    chatArea.classList.add("kim-hiding");
+                }else{
+                    chatArea.classList.add("kim-hiding");
+                }
+            });
+            
+            // Kryssknapp för att skjuta Kim åt sidan utan att starta chatten
+            xButtons.addEventListener('click', 
+            function () {
+                //console.log("klickat på kryssruta");
+                xButton.style.display = 'none';
+                chatBubble.style.display = 'none';
+                chatArea.classList.add("kim-hiding");
+            });
+            
+        // Kommun-Kim Sökfält //
+            //Instruktioner för hur ni installerar sökfältet finns i kommun_kim_install.txt
+            
+            // Textfält/formulär liknar ett vanligt sökfält där användaren kan skriva sin fråga. Frågan skickas då till chatten som öppnas automatiskt och Kim ger även ett svar.
+            // Den här funktionen behöver att kommunen tar beslut om design och tid för utveckling. Denna funktion behöver integreras i den befintliga designen på kommunens webb och ansvaras då av kommunen. Kontaktpersoner på Kommun-Kim AI-redaktionen finns tillgängliga för stöd av utveckling och frågor. 
+            // 	var form = document.getElementById("kim_form");
+            //  var textFieldValue = document.getElementById("kim_formInput");
+            //  var textFieldButton = document.getElementById('kim_formSubmit');
+                
+            //     function handleForm(event) { 
+            //         event.preventDefault();
+            //         textFieldValue.value = '';
+            //     } 
+            //     form.addEventListener('submit', handleForm);
+            //     textFieldButton.addEventListener('click', 
+            // 	function () {
+            // 	    //console.log("klickat på submit knappen");
+            // 	    textFieldValue = document.getElementById("kim_formInput");
+            // 	    if(textFieldValue.value.length !== 0){
+            // 	        //console.log("Textfält har ett värde: " + textFieldValue.value);
+            // 	        boost.chatPanel.sendMessage(textFieldValue.value);
+            // 	    }else{
+            // 	        //console.log("Textfält är null");
+            // 	    }
+            //         form.addEventListener('submit', handleForm);
+            // 	});
+        // Kommun-Kim Sökfält //
+            
+            }
+        // });
+		</script> 
+
+	    <!--<form id="kim_form" class="kim_form_style">-->
+	    <!--    <input type="text" placeholder="Fråga Kommun-Kim" name="Kommun-Kims textfält" id="kim_formInput" class="kim_formInput_style" required alt="Textfält för att ställa en fråga till Kommun-Kim chatten">-->
+	    <!--    <input type="submit" name="Submit knapp för Kommun-Kim" id="kim_formSubmit" class="kim_formSubmit_style" alt="Knapp för att skicka din fråga till Kommun-Kim chatten">-->
+	    <!--</form>  -->
+  
+	</body>
+</html>
